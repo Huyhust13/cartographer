@@ -1,0 +1,24 @@
+rosrun start_point_localization start_point_localization _configuration_directory:=/home/luna/ws/lidar2d/cartographer/install_isolated/share/cartographer_ros/configuration_files _configuration_basename:=localization_myrobot.lua _use_initial_pose:=true _relative_to_trajectory_id:=1
+
+rosservice call /start_trajectory configuration_directory:=/home/luna/ws/lidar2d/cartographer/install_isolated/share/cartographer_ros/configuration_files configuration_basename:=localization_myrobot.lua use_initial_pose:=true initial_pose:={10, 0, 0, 0, 0, 0, 1} relative_to_trajectory_id:=1
+
+
+rosservice call /start_trajectory /home/luna/ws/lidar2d/cartographer/install_isolated/share/cartographer localization_myrobot.lua true  "pose:
+header: 
+  seq: 1
+  stamp: 
+    secs: 1623996272
+    nsecs: 197998019
+  frame_id: "map"
+pose: 
+  pose: 
+    position: 
+      x: -2.00855064392
+      y: 1.50971460342
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0634057702562
+      w: 0.997987829735
+  covariance: [0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.06853892326654787]" 1

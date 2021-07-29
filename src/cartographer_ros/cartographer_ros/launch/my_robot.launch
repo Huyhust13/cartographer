@@ -1,0 +1,41 @@
+<launch>
+  <arg name="scan_topic" default="/scan_filtered" />
+  <arg name="use_sim_time" default="true" />
+  <arg name="norviz" default="false" />
+
+  <param name="/use_sim_time" value="$(arg use_sim_time)" />
+
+  <param name="robot_description"
+    textfile="$(find cartographer_ros)/urdf/myrobot.urdf" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+
+  <node name="cartographer_node" pkg="cartographer_ros"
+      type="cartographer_node" args="
+          -configuration_directory $(find cartographer_ros)/configuration_files
+          -configuration_basename my_robot.lua"
+      output="screen">
+      <remap from="/scan" to="$(arg scan_topic)" />
+  </node>
+  <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+  <group unless="$(arg norviz)">
+    <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find cartographer_ros)/configuration_files/demo_2d.rviz" />
+  </group>
+
+  <!-- <node name="change_frameid" pkg="change_frameid" type="change_frameid" /> -->
+
+  <!-- <node name="playbag" pkg="rosbag" type="play" args="\-\-clock $(arg bag_filename) \-\-topics /slamware_ros_sdk_server_node/scan"> -->
+    <!-- <remap from="/slamware_ros_sdk_server_node/scan" to="/scan" /> -->
+    <!-- <remap from="/tf" to="/tf_no_use" /> -->
+  <!-- </node> -->
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="static_base_link_2_laser" args="0 0 0 0 0 0 base_link base_laser_link 100" /> -->
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="static_base_link_2_laser" args="0 0 0 0 0 0 base_link base_front_laser_link 100" /> -->
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="static_base_link_2_laser" args="0 0 0 0 0 0 base_link laser 100" /> -->
+
+</launch>
